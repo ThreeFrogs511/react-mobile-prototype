@@ -1,0 +1,5 @@
+[
+  { "email": "alice@mail.com", "password": "123456", "firstName": "Alice", "lastName":"Wonderland", "dateOfBirth": {"year": "1990", "month": "12", "date" : "20"} },
+  { "email": "bob@mail.com", "password": "azerty", "firstName": "Bob", "lastName": "Texas", "dateOfBirth": {"year": "1970", "month" : "03", "date": "23"}},
+  { "email": "charlie@mail.com", "password": "pass123", "firstName": "Charlie", "lastName": "Michael", "dateOfBirth": {"year" : "2003", "month": "08", "date": "18"}}
+]
