@@ -1,55 +1,101 @@
-<<<<<<< HEAD
-# Welcome to your Expo app 👋
+# React Native Mobile Prototype
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A **React Native** + **Expo** mobile prototype built for a technical interview.  
+The app simulates a simple **login and user profile management system**.
 
-## Get started
+---
 
-1. Install dependencies
+## 🚀 Main Features
 
-   ```bash
-   npm install
-   ```
+### 1. **Login Screen (`LoginScreen`)**
+- Validates user input (email and password).  
+- Compares credentials against a local JSON file (`users.json`).  
+- Redirects to the profile page upon successful authentication.  
+- Displays clear error messages for invalid inputs.
 
-2. Start the app
+### 2. **Profile Screen (`ProfileScreen`)**
+- Displays the logged-in user’s information.  
+- Allows editing of profile fields: first name, last name, email, and birth date.  
+- Performs field validation before updating.  
+- Simulates data updates (no real backend).  
+- Displays confirmation or error messages accordingly.
 
-   ```bash
-   npx expo start
-   ```
+---
 
-In the output, you'll find options to open the app in a
+## 🧠 Prototype Logic
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- Global state `user` is managed in **`App.js`** using the `useState` hook.  
+- This state is passed through **props** to all screens.  
+- `LoginScreen` updates the user data with `setUser()`.  
+- `ProfileScreen` reads and edits that same data locally.  
+- In production, updates would be handled via a REST API (`fetch()` / `axios`).
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+---
 
-## Get a fresh project
+## 🧩 Project Structure
 
-When you're ready, run:
-
-```bash
-npm run reset-project
+```text
+malopan-proto/
+├── App.js
+├── data/
+│   └── users.json
+├── screens/
+│   ├── LoginScreen.js
+│   ├── ProfileScreen.js
+│   └── TransactionsScreen.js
+├── package.json
+└── README.md
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+---
 
-## Learn more
+## ⚙️ Technologies Used
 
-To learn more about developing your project with Expo, look at the following resources:
+- **React Native**
+- **Expo**
+- **React Navigation (Native Stack)**
+- **JavaScript (ES6+)**
+- **Hooks (`useState`)**
+- **StyleSheet API**
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+---
 
-## Join the community
+## 📱 Run the Project
 
-Join our community of developers creating universal apps.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
-=======
-# react-native-prototype
-Prototype mobile-first React Native built with Expo.
->>>>>>> f60afb79d6295dedffe43a4797bd8de483c19b2c
+---
+
+## Installation
+To run the prototype locally:
+
+```
+bash
+npm install
+npx expo start
+Then:
+Press w to open the web preview, or
+Scan the QR code with Expo Go (Android/iOS) to launch it on a device.
+```
+
+## Notes for Evaluation
+
+The authentication and update logic use local JSON simulation.
+In production, these operations would use an API call:
+```
+fetch('http://localhost:3000/users/1', {
+  method: 'PATCH',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(updatedUser)
+});
+```
+The prototype focuses on code readability, structure, and navigation logic, not backend implementation.
+
+---
+
+## Author
+Nicolas Lavarde
+📧 nicolas.lavarde@gmail.com
+🔗 github.com/ThreeFrogs511
+
+## License
+MIT License — Free to use for educational or recruitment purposes.
