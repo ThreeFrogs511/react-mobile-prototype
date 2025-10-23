@@ -3,6 +3,7 @@ import { Dimensions, StyleSheet, Text, TextInput, TouchableOpacity, View } from 
 
 export default function ProfileScreen({user, setUser}) {
 
+ 
 // Store local messages
 const [error, setError] = useState();   // error message after invalid inputs
 const [valid, setValid] = useState();   // confirmation message after sucessful update
@@ -19,7 +20,6 @@ const [birth, setBirth] = useState({
 const monthsFormat = ["01","02","03","04","05","06","07","08","09","10","11","12"];
 const dateFormat = ["01","02","03","04","05","06","07","08","09"];
 
-const { height } = Dimensions.get('window');
  
 return (
     // main container
@@ -61,9 +61,9 @@ return (
                     autoCapitalize="none"
                     value={user.email}></TextInput>
             </View>
-            {/* To maintain absolute control over the birth input, 
-            we divide it into three small inputs : date, month and year. 
-            We test each of them separately. */}
+            {/* To maintain complete control over the birth input, 
+                we divide it into three small inputs : date, month and year. 
+                We test each of them separately. */}
             <View style={styles.entryContainer}>
                 <Text style={styles.label}>Date of birth</Text>
                 <View style={styles.containerDateOfBirth}>
@@ -100,8 +100,8 @@ return (
            <View style={styles.containerButton}>
                 <TouchableOpacity  onPress={() => handleEditProfile(user)} style={styles.button}>
                     <Text style={styles.buttonText}>Edit my profile</Text>
-                    <Text style={error !== "" ? styles.errorText : styles.validText}>
-                        {error !=="" ? error : valid}
+                    <Text style={error ? styles.errorText : styles.validText}>
+                        {error ? error : valid}
                     </Text>
                 </TouchableOpacity>
             </View>
@@ -112,27 +112,28 @@ return (
     // this function checks if all the new inputs are valid before authorizing an update
     function handleEditProfile(user) {
         let userFirstName = user.firstName;
-        let userLastName = user.LastName;
+        let userLastName = user.lastName;
         let userEmail = user.email;
         let authorize = false;
         const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         setError(""); // Resetting the error object to avoid duplicate
         setValid("");
-        if (userFirstName === '' ||
-            userLastName === '' ||
-            userEmail === '' ||
-            birth.date === '' ||
-            birth.month === '' ||
-            birth.year === ''
+        console.log(userLastName)
+        if (!userFirstName ||
+            !userLastName  ||
+            !userEmail  ||
+            !birth.date ||
+            !birth.month ||
+            !birth.year
         ) {
             setError('Empty field(s).');
         } else if (!regex.test(userEmail)) {
-        setError('Invalid email');
+            setError('Invalid email');
         } else if (birth.date <= 0 || birth.date > 31 || isNaN(birth.date)) {
             setError('Invalid date of birth');
         } else if (birth.month <=0 || birth.month > 12 || isNaN(birth.month))  {
             setError('Invalid date of birth');
-        } else if (birth.year < 1900 || isNaN(birth.year)) {
+        } else if (birth.year < 1900 || isNaN(birth.year) || birth.year >= 2007) {
             setError('Invalid date of birth');
         } else {
             setError("");
@@ -144,7 +145,7 @@ return (
             if (birth.date<10 && !dateFormat.includes(birth.date)) {
                 setBirth((birth) => ({...birth, date: '0' + birth.date}))
             } 
-
+            setValid('Your profile has been successfully updated !');
 
             
             // Production example (API call):
@@ -172,7 +173,6 @@ const styles = StyleSheet.create({
         justifyContent:'flex-start',
         alignItems:'stretch', 
         backgroundColor:'#0D0D0D',
-        fontFamily:  "'Roboto', sans-serif"
 
     },
     profileContainer : {
@@ -183,7 +183,6 @@ const styles = StyleSheet.create({
         fontSize: 30,
         color:'white',
         textAlign: 'center',
-        // backgroundColor:'red',
         marginTop: 20,
         height: '10%'
     },
@@ -204,7 +203,6 @@ const styles = StyleSheet.create({
     input : {
         borderWidth: 2, 
         height:50,
-        // borderColor: 'red',
         borderRadius:25, 
         borderColor:'transparent',
         paddingLeft: 20, 
@@ -216,13 +214,11 @@ const styles = StyleSheet.create({
         display:'flex',
         flexDirection:'row',
         justifyContent:'space-between',
-        // gap: 10,
     },
 
     inputBirth : {
         borderWidth: 2, 
         height:50,
-        // borderColor: 'red',
         borderRadius:25, 
         borderColor:'transparent',
         color:'white', 

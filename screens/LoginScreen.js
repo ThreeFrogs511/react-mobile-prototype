@@ -10,7 +10,6 @@ export default function Login({ navigation, setUser }) {
   const [email, setEmail] = useState("");   // email input
   const [password, setPassword] = useState(""); // password input
 
-  const { height } = Dimensions.get('window'); // viewport height reference
 
   return (
     <View style={styles.container}>
@@ -100,14 +99,11 @@ const styles = StyleSheet.create({
         alignItems:'stretch', 
         gap: 50,
         backgroundColor:'#0D0D0D',
-        fontFamily:  "'Roboto', sans-serif"
-
     },
     title:{
         fontSize: 30,
         color:'white',
         textAlign: 'center',
-        // backgroundColor:'red',
         marginTop: 20,
         height: '10%'
     },
@@ -117,9 +113,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column', 
         justifyContent:'flex-start',
         gap: 50,
-        // backgroundColor: 'green',
         paddingInline: 10,
-        // marginBlock: 'auto',
         height: '50%'
         },
 
@@ -132,7 +126,6 @@ const styles = StyleSheet.create({
     input : {
         borderWidth: 2, 
         height:65,
-        // borderColor: 'red',
         borderColor:'transparent',
         borderRadius:25, 
         paddingLeft: 20, 
